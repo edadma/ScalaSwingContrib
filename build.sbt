@@ -2,7 +2,7 @@ import SonatypeKeys._
 
 name := "ScalaSwingContrib"
 
-organization := "com.github.benhutchison"
+organization := "org.hyperreal" //"com.github.benhutchison"
 
 version := "1.5e"
 
@@ -38,13 +38,15 @@ crossScalaVersions := Seq("2.10.4", "2.11.2")
 publishMavenStyle := true
 
 
-publishTo <<= version { (v: String) =>
-  val nexus = "https://oss.sonatype.org/"
-  if (v.trim.endsWith("SNAPSHOT")) 
-    Some("snapshots" at nexus + "content/repositories/snapshots") 
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-}
+publishTo := Some( Resolver.sftp( "Hyperreal Repository", "hyperreal.ca", "/var/www/hyperreal.ca/html/maven2" ) )
+
+//publishTo <<= version { (v: String) =>
+//  val nexus = "https://oss.sonatype.org/"
+//  if (v.trim.endsWith("SNAPSHOT")) 
+//    Some("snapshots" at nexus + "content/repositories/snapshots") 
+//  else
+//    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+//}
 
 //for local testing
 //publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository")))
